@@ -1,0 +1,52 @@
+[project]
+name = "exam-scheduling-qubo"
+version = "0.1.0"
+description = "QUBO-based exam timetable scheduling solver using D-Wave quantum annealing"
+readme = "README_SOLVER.md"
+requires-python = ">=3.8"
+license = { text = "MIT" }
+authors = [
+    { name = "Your Name", email = "your.email@example.com" }
+]
+keywords = ["quantum computing", "QUBO", "D-Wave", "scheduling", "optimization", "exam timetabling"]
+
+dependencies = [
+    "dwave-ocean-sdk>=6.0.0",
+    "numpy>=1.21.0",
+    "pandas>=1.3.0",
+    "qiskit>=0.45.0,<1.0.0",
+    "qiskit-optimization>=0.5.0",
+    "qiskit-ibm-runtime>=0.15.0",
+    "networkx>=2.8.0",
+    "matplotlib>=3.4.0",
+]
+
+[project.optional-dependencies]
+viz = [
+    "matplotlib>=3.4.0",
+    "seaborn>=0.11.0",
+]
+classical = [
+    "ortools>=9.4.0",  # For classical baseline comparison
+]
+dev = [
+    "pytest>=7.0.0",
+    "black>=22.0.0",
+    "ipython>=8.0.0",
+    "jupyter>=1.0.0",
+]
+
+[tool.uv]
+dev-dependencies = [
+    "pytest>=7.0.0",
+    "ipython>=8.0.0",
+]
+
+[tool.black]
+line-length = 100
+target-version = ["py38", "py39", "py310", "py311"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+python_functions = "test_*"

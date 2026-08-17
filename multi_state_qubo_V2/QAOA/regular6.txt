@@ -1,0 +1,1527 @@
+
+============================================================
+EXAM SCHEDULING PIPELINE
+============================================================
+Input CSV: ../Student Course (Jul-Nov 2025 and Winter 2025) Regular Elective.csv
+Adjacency mode: all
+K (time slots): 18
+Backend: NEAL
+λ1=15000.0  λ2=12000.0  λ3=12000.0  λ4=0.01
+Slot capacity: 5500
+
+============================================================
+GENERATING DATASET FROM CSV
+============================================================
+Input CSV: ../Student Course (Jul-Nov 2025 and Winter 2025) Regular Elective.csv
+Adjacency mode for solver: all
+✓ Rows after filters (all): 96439
+✓ Rows after filters (major): 68872
+✓ Major graph: 694 courses, 1638 edges (0.68% density)
+✓ All graph: 1171 courses, 4894 edges (0.71% density)
+✓ Selected 'all' graph for solver
+✓ Saved dataset to: output/run_20260402_113602/all
+
+============================================================
+RUNNING SOLVER FOR MODE: ALL
+============================================================
+
+============================================================
+GENERATING VISUALIZATIONS
+============================================================
+
+✓ Saved adjacency heatmap to: output/run_20260402_113602/all/adjacency_heatmap.png
+✓ Saved conflict graph to: output/run_20260402_113602/all/conflict_graph.png
+
+============================================================
+BUILDING QUBO MATRIX
+============================================================
+Exams: 1171
+Colors (K): 18
+Exam variables: 21078
+Slack bits per slot: 13 (max slack value: 5500)
+Slack variables: 234
+Total variables: 21312
+QUBO size: 21312 × 21312
+Room capacity: 5500
+λ1=15000.0  λ2=12000.0  λ3=12000.0  λ4=0.01
+
+Adding C1: Each exam exactly one slot...
+Adding C2: Conflicting exams in different slots...
+           Enrollment-aware weighting enabled (alpha=4.00)
+✓ 4894 conflict pairs added
+Adding C3: Same-year exams not in consecutive slots...
+✓ 3859 same-year pairs, 131206 terms added
+Adding C4: Slot capacity ≤ 5500 with binary-weighted slack bits...
+           13 slack bits per slot × 18 slots = 234 slack variables
+✓ Capacity constraint with binary slack bits added (C=5500)
+
+✓ QUBO built: 25854146 non-zero entries
+
+============================================================
+SOLVING WITH NEAL (Simulated Annealing)
+============================================================
+Variables: 21312
+Num reads: 2000
+
+⏳ Running simulated annealing...
+✓ Completed in 16551.84s
+Energy: -22881191.60
+
+============================================================
+RESULTS
+============================================================
+
+NEAL
+------------------------------------------------------------
+
+Main QUBO constraint summary (before repair):
+  C1 one-hot violations: 6
+  C2 same-slot conflict violations: 3
+  C3 consecutive-slot violations: 0
+  C4 slots over capacity: 3
+  Valid before repair: NO
+
+Attempting minimum-slot group repair (smaller QUBO + group brute-force)...
+
+============================================================
+BUILDING QUBO MATRIX
+============================================================
+Exams: 12
+Colors (K): 1
+Exam variables: 12
+Slack bits per slot: 13 (max slack value: 5500)
+Slack variables: 13
+Total variables: 25
+QUBO size: 25 × 25
+Room capacity: 5500
+λ1=15000.0  λ2=12000.0  λ3=12000.0  λ4=0.01
+
+Adding C1: Each exam exactly one slot...
+Adding C2: Conflicting exams in different slots...
+           Enrollment-aware weighting enabled (alpha=4.00)
+✓ 15 conflict pairs added
+Adding C3: Same-year exams not in consecutive slots...
+✓ 8 same-year pairs, 0 terms added
+Adding C4: Slot capacity ≤ 5500 with binary-weighted slack bits...
+           13 slack bits per slot × 1 slots = 13 slack variables
+✓ Capacity constraint with binary slack bits added (C=5500)
+
+✓ QUBO built: 625 non-zero entries
+  [Smaller QUBO k=1]
+    - valid one-hot samples found: 0
+    - best sampled metrics: unavailable (no valid one-hot sample)
+    - status: NOT FEASIBLE at this k
+
+============================================================
+BUILDING QUBO MATRIX
+============================================================
+Exams: 12
+Colors (K): 2
+Exam variables: 24
+Slack bits per slot: 13 (max slack value: 5500)
+Slack variables: 26
+Total variables: 50
+QUBO size: 50 × 50
+Room capacity: 5500
+λ1=15000.0  λ2=12000.0  λ3=12000.0  λ4=0.01
+
+Adding C1: Each exam exactly one slot...
+Adding C2: Conflicting exams in different slots...
+           Enrollment-aware weighting enabled (alpha=4.00)
+✓ 15 conflict pairs added
+Adding C3: Same-year exams not in consecutive slots...
+✓ 8 same-year pairs, 16 terms added
+Adding C4: Slot capacity ≤ 5500 with binary-weighted slack bits...
+           13 slack bits per slot × 2 slots = 26 slack variables
+✓ Capacity constraint with binary slack bits added (C=5500)
+
+✓ QUBO built: 1306 non-zero entries
+  [Smaller QUBO k=2]
+    - valid one-hot samples found: 0
+    - best sampled metrics: unavailable (no valid one-hot sample)
+    - status: NOT FEASIBLE at this k
+
+============================================================
+BUILDING QUBO MATRIX
+============================================================
+Exams: 12
+Colors (K): 3
+Exam variables: 36
+Slack bits per slot: 13 (max slack value: 5500)
+Slack variables: 39
+Total variables: 75
+QUBO size: 75 × 75
+Room capacity: 5500
+λ1=15000.0  λ2=12000.0  λ3=12000.0  λ4=0.01
+
+Adding C1: Each exam exactly one slot...
+Adding C2: Conflicting exams in different slots...
+           Enrollment-aware weighting enabled (alpha=4.00)
+✓ 15 conflict pairs added
+Adding C3: Same-year exams not in consecutive slots...
+✓ 8 same-year pairs, 32 terms added
+Adding C4: Slot capacity ≤ 5500 with binary-weighted slack bits...
+           13 slack bits per slot × 3 slots = 39 slack variables
+✓ Capacity constraint with binary slack bits added (C=5500)
+
+✓ QUBO built: 2011 non-zero entries
+  [Smaller QUBO k=3]
+    - valid one-hot samples found: 9
+    - best sampled metrics: C1=0, C2=1, C3=3, C4=0
+    - status: NOT FEASIBLE at this k
+
+============================================================
+BUILDING QUBO MATRIX
+============================================================
+Exams: 12
+Colors (K): 4
+Exam variables: 48
+Slack bits per slot: 13 (max slack value: 5500)
+Slack variables: 52
+Total variables: 100
+QUBO size: 100 × 100
+Room capacity: 5500
+λ1=15000.0  λ2=12000.0  λ3=12000.0  λ4=0.01
+
+Adding C1: Each exam exactly one slot...
+Adding C2: Conflicting exams in different slots...
+           Enrollment-aware weighting enabled (alpha=4.00)
+✓ 15 conflict pairs added
+Adding C3: Same-year exams not in consecutive slots...
+✓ 8 same-year pairs, 48 terms added
+Adding C4: Slot capacity ≤ 5500 with binary-weighted slack bits...
+           13 slack bits per slot × 4 slots = 52 slack variables
+✓ Capacity constraint with binary slack bits added (C=5500)
+
+✓ QUBO built: 2740 non-zero entries
+  [Smaller QUBO k=4]
+    - valid one-hot samples found: 461
+    - best sampled metrics: C1=0, C2=0, C3=2, C4=0
+    - status: NOT FEASIBLE at this k
+
+============================================================
+BUILDING QUBO MATRIX
+============================================================
+Exams: 12
+Colors (K): 5
+Exam variables: 60
+Slack bits per slot: 13 (max slack value: 5500)
+Slack variables: 65
+Total variables: 125
+QUBO size: 125 × 125
+Room capacity: 5500
+λ1=15000.0  λ2=12000.0  λ3=12000.0  λ4=0.01
+
+Adding C1: Each exam exactly one slot...
+Adding C2: Conflicting exams in different slots...
+           Enrollment-aware weighting enabled (alpha=4.00)
+✓ 15 conflict pairs added
+Adding C3: Same-year exams not in consecutive slots...
+✓ 8 same-year pairs, 64 terms added
+Adding C4: Slot capacity ≤ 5500 with binary-weighted slack bits...
+           13 slack bits per slot × 5 slots = 65 slack variables
+✓ Capacity constraint with binary slack bits added (C=5500)
+
+✓ QUBO built: 3493 non-zero entries
+  [Smaller QUBO k=5]
+    - valid one-hot samples found: 1
+    - best sampled metrics: C1=0, C2=0, C3=0, C4=0
+    - status: FEASIBLE at this k
+Slot expansion status: Group repair succeeded: k_repair=5, groups=5, placed_groups=0, appended_groups=5. Total: 24 (was 18), C3=0.
+Runtime: 16551.84s
+Energy: -22881191.60
+Valid: ✓ YES
+Graph conflicts (dataset edges): 4894
+Graph conflict density: 0.71%
+C1 one-hot violations: 0
+C2 same-slot conflict violations: 0
+Solution conflict violations: 0
+Solution conflict violations (% of graph edges): 0.00%
+C3 consecutive-slot violations: 0
+C4 slots over capacity: 0
+C4 max overflow: 0.00
+C4 total overflow: 0.00
+Exams assigned: 1171/1171
+Colors used: 23/24
+All conflicts file: output/run_20260402_113602/all/neal_all_conflicts.json
+
+============================================================
+TIMETABLE
+============================================================
+
+============================================================
+TIME SLOT 0
+============================================================
+  AIM6143 | Year 1 | 18 students
+  AR5101 | Year 9 | 19 students
+  ARC1104 | Year 1 | 31 students
+  ARC2101 | Year 3 | 23 students
+  ART2105 | Year 3 | 25 students
+  AT2141 | Year 3 | 2 students
+  BA3101 | Year 5 | 25 students
+  BB3102 | Year 5 | 348 students
+  BCF1105 | Year 1 | 38 students
+  BCH2105 | Year 3 | 97 students
+  BH3101 | Year 5 | 114 students
+  BIO2101 | Year 3 | 83 students
+  BIO2150 | Year 3 | 64 students
+  BIT2101 | Year 3 | 65 students
+  CAP1103 | Year 1 | 199 students
+  CAP3245 | Year 1 | 1 students
+  CAP7105 | Year 3 | 108 students
+  CAP8010 | Year 1 | 1 students
+  CC3102 | Year 5 | 2 students
+  CC4151 | Year 7 | 82 students
+  CC4156 | Year 7 | 42 students
+  CCE2102 | Year 3 | 186 students
+  CE4145 | Year 7 | 8 students
+  CHE2120 | Year 3 | 13 students
+  CHY6109 | Year 1 | 6 students
+  CIV3144 | Year 5 | 14 students
+  CIV3145 | Year 5 | 7 students
+  CM3141 | Year 5 | 15 students
+  COM2101 | Year 3 | 18 students
+  COM7102 | Year 3 | 9 students
+  CS4149 | Year 7 | 122 students
+  CS4152 | Year 7 | 50 students
+  CSB3121 | Year 5 | 17 students
+  CSE6103 | Year 1 | 9 students
+  CSE8009 | Year 1 | 5 students
+  DSE3121 | Year 5 | 63 students
+  EC4161 | Year 7 | 33 students
+  ECE3102 | Year 5 | 79 students
+  ECO7103 | Year 3 | 2 students
+  EO1106 | Year 1 | 1 students
+  EO3101 | Year 5 | 33 students
+  HOM2102 | Year 3 | 7 students
+  ICS6101 | Year 1 | 3 students
+  IIS2102 | Year 3 | 260 students
+  IMB2101 | Year 3 | 37 students
+  INT2121 | Year 3 | 205 students
+  INT3140 | Year 5 | 74 students
+  IT4151 | Year 7 | 42 students
+  IT4158 | Year 7 | 154 students
+  JC3103 | Year 5 | 63 students
+  LA2101 | Year 3 | 5 students
+  LA3119 | Year 5 | 19 students
+  LAW1103 | Year 1 | 228 students
+  LLC1109 | Year 1 | 13 students
+  LLC1111 | Year 1 | 21 students
+  LLC1121 | Year 1 | 23 students
+  LLC6105 | Year 1 | 9 students
+  LLM6106 | Year 1 | 11 students
+  LLM6110 | Year 1 | 5 students
+  LN2108 | Year 3 | 9 students
+  MA1002 | Year 1 | 3 students
+  MA1201 | Year 2 | 1 students
+  MA3104 | Year 5 | 6 students
+  MBA6115 | Year 1 | 120 students
+  MBA7146 | Year 3 | 16 students
+  MBA7159 | Year 3 | 19 students
+  MBA7176 | Year 3 | 16 students
+  MCE2101 | Year 3 | 32 students
+  MEE1006 | Year 1 | 3 students
+  MEE1009 | Year 1 | 1292 students
+  MEE3140 | Year 5 | 20 students
+  MEE8005 | Year 1 | 2 students
+  PES1101 | Year 1 | 12 students
+  PES8002 | Year 1 | 1 students
+  PHY1103 | Year 1 | 32 students
+  PHY2101 | Year 3 | 9 students
+  VDT3101 | Year 5 | 9 students
+
+============================================================
+TIME SLOT 1
+============================================================
+  AI4143 | Year 7 | 349 students
+  AR4102 | Year 7 | 17 students
+  ARC6140 | Year 1 | 4 students
+  ART2161 | Year 3 | 41 students
+  ART6102 | Year 1 | 6 students
+  AT3103 | Year 5 | 17 students
+  AUT3101 | Year 5 | 7 students
+  BBA8021 | Year 1 | 2 students
+  BBN2102 | Year 3 | 45 students
+  BCH1111 | Year 1 | 101 students
+  BIO6101 | Year 1 | 36 students
+  BIT3040 | Year 5 | 47 students
+  BT2241 | Year 4 | 1 students
+  BT3149 | Year 5 | 66 students
+  CA3151 | Year 5 | 101 students
+  CAP2105 | Year 3 | 167 students
+  CAP8009 | Year 1 | 1 students
+  CC4155 | Year 7 | 97 students
+  CHE3120 | Year 5 | 4 students
+  CHY1160 | Year 1 | 109 students
+  CHY7141 | Year 3 | 4 students
+  CHY8004 | Year 1 | 2 students
+  CS4154 | Year 7 | 79 students
+  CS4157 | Year 7 | 238 students
+  CS4161 | Year 7 | 52 students
+  CSE8002 | Year 1 | 5 students
+  CSE8003 | Year 1 | 2 students
+  DS4145 | Year 7 | 178 students
+  DSE2102 | Year 3 | 521 students
+  DSE6121 | Year 1 | 4 students
+  EC4141 | Year 7 | 17 students
+  ECE6104 | Year 1 | 3 students
+  ECO1102 | Year 1 | 36 students
+  HA4101 | Year 7 | 19 students
+  IIS3101 | Year 5 | 207 students
+  IMB1103 | Year 1 | 58 students
+  INT2120 | Year 3 | 138 students
+  IS4141 | Year 7 | 126 students
+  IT3101 | Year 5 | 1 students
+  IT4154 | Year 7 | 186 students
+  LA3103 | Year 5 | 156 students
+  LA3108 | Year 5 | 30 students
+  LN1106 | Year 1 | 3 students
+  MA2201 | Year 4 | 1 students
+  MAS1141 | Year 1 | 2 students
+  MAS2001 | Year 3 | 1510 students
+  MBB7107 | Year 3 | 10 students
+  ME4162 | Year 7 | 26 students
+  PHY1001 | Year 2 | 1 students
+  PHY7141 | Year 1 | 5 students
+  PS3102 | Year 5 | 124 students
+  PY3151 | Year 5 | 6 students
+
+============================================================
+TIME SLOT 2
+============================================================
+  AA4101 | Year 7 | 21 students
+  AI2104 | Year 3 | 1 students
+  AI3105 | Year 5 | 1 students
+  AIM3141 | Year 5 | 261 students
+  AR5103 | Year 9 | 19 students
+  ARC2102 | Year 3 | 23 students
+  ART2160 | Year 3 | 111 students
+  ART7143 | Year 3 | 9 students
+  AT2160 | Year 3 | 5 students
+  BB1105 | Year 1 | 2 students
+  BB3147 | Year 5 | 163 students
+  BBA1119 | Year 1 | 115 students
+  BBA2119 | Year 3 | 90 students
+  BH2106 | Year 3 | 9 students
+  BIO7101 | Year 3 | 17 students
+  BIO8020 | Year 1 | 3 students
+  BIT1001 | Year 1 | 1733 students
+  CA2142 | Year 3 | 1 students
+  CA3147 | Year 5 | 41 students
+  CAP3250 | Year 1 | 1 students
+  CAP7104 | Year 3 | 108 students
+  CHY2155 | Year 3 | 6 students
+  CHY2161 | Year 3 | 10 students
+  CHY8001 | Year 1 | 8 students
+  CIV3101 | Year 5 | 21 students
+  CS1002 | Year 2 | 2 students
+  CS4144 | Year 7 | 95 students
+  CS8006 | Year 1 | 4 students
+  CSE3121 | Year 5 | 730 students
+  DSE3120 | Year 5 | 390 students
+  EC1001 | Year 1 | 1 students
+  ECO2101 | Year 3 | 23 students
+  ECO2140 | Year 3 | 7 students
+  ECO7101 | Year 3 | 2 students
+  EEE3102 | Year 5 | 8 students
+  EL4140 | Year 7 | 17 students
+  ELC3144 | Year 5 | 22 students
+  ICS6105 | Year 1 | 3 students
+  INT3146 | Year 5 | 225 students
+  IS4142 | Year 7 | 131 students
+  IT4155 | Year 7 | 109 students
+  JC3150 | Year 5 | 1 students
+  LA2140 | Year 3 | 7 students
+  LLC1103 | Year 1 | 10 students
+  LLC2018 | Year 3 | 322 students
+  LLC2122 | Year 3 | 16 students
+  LLC6101 | Year 1 | 9 students
+  LLM6109 | Year 1 | 5 students
+  MBA6114 | Year 1 | 107 students
+  MBA7158 | Year 3 | 22 students
+  MC4164 | Year 7 | 15 students
+  MCE2120 | Year 3 | 32 students
+  MCE3120 | Year 5 | 14 students
+  MEE3149 | Year 5 | 20 students
+  MEE8004 | Year 1 | 2 students
+  PHY8001 | Year 1 | 6 students
+  PS1103 | Year 1 | 1 students
+  PS2102 | Year 3 | 2 students
+  PS2141 | Year 3 | 4 students
+  PS3140 | Year 5 | 2 students
+
+============================================================
+TIME SLOT 3
+============================================================
+  AI4146 | Year 7 | 349 students
+  AIM6103 | Year 1 | 18 students
+  ARC6105 | Year 1 | 4 students
+  AT3149 | Year 5 | 13 students
+  AUT3147 | Year 5 | 7 students
+  BB3141 | Year 5 | 10 students
+  BB3151 | Year 5 | 170 students
+  BBA1021 | Year 1 | 506 students
+  BBN2101 | Year 3 | 47 students
+  BCH2106 | Year 3 | 97 students
+  BH3103 | Year 5 | 114 students
+  BIO2104 | Year 3 | 70 students
+  CAP2104 | Year 3 | 168 students
+  CC4157 | Year 7 | 68 students
+  CCE2121 | Year 3 | 124 students
+  CCE3120 | Year 5 | 58 students
+  CCE3121 | Year 5 | 84 students
+  CHE3102 | Year 5 | 4 students
+  CHY1106 | Year 1 | 31 students
+  CHY6101 | Year 1 | 6 students
+  CHY7152 | Year 3 | 3 students
+  CIV2120 | Year 3 | 29 students
+  CIV8003 | Year 1 | 2 students
+  CM2105 | Year 3 | 2 students
+  COM2104 | Year 3 | 17 students
+  COM7107 | Year 3 | 9 students
+  CS3104 | Year 5 | 4 students
+  CSE6102 | Year 1 | 6 students
+  CSE8019 | Year 1 | 6 students
+  DOA1001 | Year 1 | 1711 students
+  DS2201 | Year 4 | 1 students
+  DSE2103 | Year 3 | 523 students
+  DSE6103 | Year 1 | 6 students
+  EC4152 | Year 7 | 22 students
+  ECO6103 | Year 1 | 5 students
+  ECO7102 | Year 1 | 4 students
+  EEE8020 | Year 1 | 1 students
+  EL4142 | Year 7 | 15 students
+  ELC2103 | Year 3 | 27 students
+  EO3170 | Year 5 | 33 students
+  HA2104 | Year 3 | 1 students
+  ID4103 | Year 7 | 45 students
+  IS2101 | Year 3 | 2 students
+  JC2160 | Year 3 | 3 students
+  JMC8006 | Year 1 | 2 students
+  LA3105 | Year 5 | 188 students
+  LCM3103 | Year 3 | 30 students
+  LLC2104 | Year 3 | 9 students
+  LLC7144 | Year 3 | 15 students
+  MA2217 | Year 4 | 1 students
+  MAS2114 | Year 3 | 4 students
+  MAS6105 | Year 1 | 133 students
+  MAS8012 | Year 1 | 1 students
+  MAS8014 | Year 1 | 1 students
+  MBA7144 | Year 3 | 47 students
+  ME4163 | Year 7 | 26 students
+  MEE1007 | Year 2 | 1 students
+  PS3101 | Year 5 | 124 students
+  PSY1103 | Year 1 | 160 students
+  PSY6103 | Year 1 | 70 students
+
+============================================================
+TIME SLOT 4
+============================================================
+  AA4103 | Year 7 | 21 students
+  AIM3101 | Year 5 | 542 students
+  AIM6170 | Year 1 | 5 students
+  ARC2107 | Year 3 | 23 students
+  AT2101 | Year 3 | 1 students
+  AU4155 | Year 7 | 6 students
+  BB3148 | Year 5 | 165 students
+  BBA1140 | Year 1 | 17 students
+  BCH1113 | Year 1 | 101 students
+  BIO1101 | Year 1 | 109 students
+  BT2150 | Year 3 | 1 students
+  BT2202 | Year 4 | 1 students
+  CA2106 | Year 3 | 6 students
+  CAP6110 | Year 1 | 12 students
+  CAP7155 | Year 3 | 55 students
+  CAP7157 | Year 3 | 60 students
+  CHY2152 | Year 3 | 6 students
+  COM6104 | Year 1 | 6 students
+  CS4147 | Year 7 | 78 students
+  CS4148 | Year 7 | 61 students
+  CS4151 | Year 7 | 76 students
+  CS4162 | Year 7 | 125 students
+  CSE3144 | Year 5 | 88 students
+  CSE3145 | Year 5 | 157 students
+  CSE8007 | Year 1 | 4 students
+  CSE8008 | Year 1 | 2 students
+  CV4145 | Year 7 | 12 students
+  CY3107 | Year 5 | 4 students
+  DS4147 | Year 7 | 178 students
+  EC4156 | Year 7 | 28 students
+  ECO2104 | Year 3 | 23 students
+  EE4143 | Year 7 | 5 students
+  EO1107 | Year 1 | 1 students
+  FAD2101 | Year 3 | 15 students
+  HOM1101 | Year 1 | 7 students
+  HT3101 | Year 5 | 12 students
+  HTO1103 | Year 1 | 14 students
+  HTO2102 | Year 3 | 10 students
+  IDE2103 | Year 3 | 22 students
+  IIS3151 | Year 5 | 157 students
+  IMB2102 | Year 3 | 37 students
+  INT2103 | Year 3 | 345 students
+  IS4140 | Year 7 | 126 students
+  IS4143 | Year 7 | 131 students
+  LA4103 | Year 7 | 142 students
+  LA5101 | Year 9 | 165 students
+  LAW1102 | Year 1 | 274 students
+  LCM1120 | Year 1 | 1 students
+  LCM2101 | Year 3 | 92 students
+  LLM6103 | Year 1 | 13 students
+  LLM6108 | Year 1 | 11 students
+  MA2117 | Year 3 | 8 students
+  MA3106 | Year 5 | 27 students
+  MAS6113 | Year 1 | 4 students
+  MAS7117 | Year 3 | 21 students
+  MAS8027 | Year 1 | 9 students
+  MC4162 | Year 7 | 10 students
+  PSY1141 | Year 1 | 41 students
+  PSY2104 | Year 3 | 133 students
+
+============================================================
+TIME SLOT 5
+============================================================
+  AIM2102 | Year 3 | 600 students
+  ARC1101 | Year 1 | 31 students
+  ART2101 | Year 3 | 10 students
+  ART7101 | Year 3 | 9 students
+  AT2147 | Year 3 | 4 students
+  AUT3120 | Year 5 | 7 students
+  BA3102 | Year 5 | 25 students
+  BB1101 | Year 1 | 1 students
+  BB3105 | Year 5 | 1 students
+  BB3142 | Year 5 | 9 students
+  BBA2103 | Year 3 | 284 students
+  BBA8018 | Year 1 | 2 students
+  BBN1104 | Year 1 | 161 students
+  BIO2112 | Year 3 | 12 students
+  BIO6111 | Year 1 | 13 students
+  BIO8019 | Year 1 | 1 students
+  BIT3101 | Year 5 | 46 students
+  BRG0003 | Year 1 | 1 students
+  CA3102 | Year 5 | 164 students
+  CAP2101 | Year 3 | 165 students
+  CAP8012 | Year 1 | 2 students
+  CC4161 | Year 7 | 91 students
+  CCE3101 | Year 5 | 141 students
+  CE4141 | Year 7 | 8 students
+  CH3121 | Year 5 | 10 students
+  CHY6108 | Year 1 | 6 students
+  CIV3120 | Year 5 | 21 students
+  CIV8006 | Year 1 | 1 students
+  CS2201 | Year 4 | 2 students
+  CS2202 | Year 4 | 1 students
+  CS2203 | Year 4 | 3 students
+  CSE2103 | Year 3 | 712 students
+  DS2202 | Year 4 | 1 students
+  DSE2120 | Year 3 | 520 students
+  DSE3102 | Year 5 | 456 students
+  ECE2102 | Year 3 | 141 students
+  ECE6106 | Year 1 | 4 students
+  ECE8007 | Year 1 | 1 students
+  ECO6104 | Year 1 | 5 students
+  ECO6105 | Year 1 | 6 students
+  ELC2121 | Year 3 | 27 students
+  EO3103 | Year 5 | 33 students
+  FAR2101 | Year 3 | 10 students
+  HA2102 | Year 3 | 1 students
+  ID1101 | Year 1 | 1 students
+  INT3120 | Year 5 | 323 students
+  IS2105 | Year 3 | 1 students
+  IS3102 | Year 5 | 1 students
+  IT4146 | Year 7 | 197 students
+  IT4157 | Year 7 | 46 students
+  JC1101 | Year 1 | 2 students
+  JMC2104 | Year 3 | 52 students
+  LA1902 | Year 9 | 1 students
+  LA2103 | Year 3 | 4 students
+  LA3101 | Year 5 | 157 students
+  LA3110 | Year 5 | 30 students
+  LLC6102 | Year 1 | 9 students
+  LN3101 | Year 5 | 15 students
+  MAS2112 | Year 3 | 4 students
+  MAS6001 | Year 1 | 7 students
+  MBA7141 | Year 3 | 55 students
+  MEE1008 | Year 1 | 412 students
+  MEE8006 | Year 1 | 1 students
+  PHY7140 | Year 1 | 11 students
+  PS3144 | Year 5 | 91 students
+  PSY1156 | Year 1 | 160 students
+  PY3101 | Year 5 | 6 students
+
+============================================================
+TIME SLOT 6
+============================================================
+  AIM3102 | Year 5 | 541 students
+  AIM6140 | Year 1 | 18 students
+  AR3106 | Year 5 | 23 students
+  AR4104 | Year 7 | 17 students
+  ARC2108 | Year 3 | 23 students
+  ART2106 | Year 3 | 15 students
+  BB2141 | Year 3 | 6 students
+  BB2147 | Year 3 | 2 students
+  BCH2102 | Year 3 | 97 students
+  BIO2152 | Year 3 | 58 students
+  BIO7145 | Year 3 | 17 students
+  BIO8013 | Year 1 | 2 students
+  BT3113 | Year 5 | 10 students
+  CC3140 | Year 5 | 2 students
+  CC4164 | Year 7 | 47 students
+  CC4167 | Year 7 | 111 students
+  CHE3101 | Year 5 | 4 students
+  CHY1002 | Year 1 | 1736 students
+  CHY3202 | Year 1 | 1 students
+  CHY7109 | Year 3 | 4 students
+  CIV8001 | Year 1 | 4 students
+  CM3102 | Year 5 | 27 students
+  COM2102 | Year 3 | 15 students
+  COM6107 | Year 1 | 11 students
+  CS4153 | Year 7 | 223 students
+  CSE3141 | Year 5 | 424 students
+  CSE3147 | Year 5 | 53 students
+  CSE6141 | Year 1 | 6 students
+  CV4140 | Year 7 | 6 students
+  DS4142 | Year 7 | 178 students
+  DSE6141 | Year 1 | 4 students
+  ECE3140 | Year 5 | 35 students
+  ECE3141 | Year 5 | 44 students
+  ELC3102 | Year 5 | 22 students
+  ICS6103 | Year 1 | 3 students
+  ID3103 | Year 5 | 32 students
+  IIS2121 | Year 3 | 198 students
+  IIS3141 | Year 5 | 106 students
+  IM3102 | Year 5 | 19 students
+  IT3104 | Year 5 | 2 students
+  JC3102 | Year 5 | 62 students
+  JMC1104 | Year 1 | 65 students
+  LA1102 | Year 1 | 1 students
+  LA2142 | Year 3 | 1 students
+  LA4203 | Year 8 | 2 students
+  LA5106 | Year 9 | 166 students
+  LAW1101 | Year 1 | 230 students
+  LAW8001 | Year 1 | 6 students
+  LCM3102 | Year 3 | 30 students
+  LLC2121 | Year 3 | 16 students
+  LLM6117 | Year 1 | 5 students
+  MA2101 | Year 3 | 5 students
+  MA3144 | Year 5 | 6 students
+  MAS1110 | Year 1 | 32 students
+  MAS1111 | Year 1 | 194 students
+  MAS2145 | Year 3 | 16 students
+  MAS6114 | Year 1 | 4 students
+  MBA6109 | Year 1 | 118 students
+  MC4154 | Year 7 | 25 students
+  MCE8012 | Year 1 | 1 students
+  ME4147 | Year 7 | 26 students
+  PHY7101 | Year 3 | 1 students
+  PSY2142 | Year 3 | 10 students
+  PSY6101 | Year 1 | 68 students
+  RAI2103 | Year 3 | 76 students
+  VDT3143 | Year 5 | 9 students
+
+============================================================
+TIME SLOT 7
+============================================================
+  AI3204 | Year 6 | 1 students
+  AI4102 | Year 7 | 349 students
+  ARC1106 | Year 1 | 32 students
+  ARC7102 | Year 3 | 4 students
+  ART1161 | Year 1 | 76 students
+  ART2141 | Year 3 | 4 students
+  ART2162 | Year 3 | 47 students
+  ART6101 | Year 1 | 8 students
+  AT1101 | Year 1 | 1 students
+  AT2155 | Year 3 | 2 students
+  BA3103 | Year 5 | 25 students
+  BB3104 | Year 5 | 338 students
+  BBA1104 | Year 1 | 284 students
+  BBA2102 | Year 3 | 290 students
+  BCF1102 | Year 1 | 39 students
+  BIT2120 | Year 3 | 41 students
+  CA2101 | Year 3 | 5 students
+  CA3143 | Year 5 | 22 students
+  CAP6108 | Year 1 | 134 students
+  CCE3102 | Year 5 | 158 students
+  CE4143 | Year 7 | 8 students
+  CHE8029 | Year 1 | 7 students
+  COM7103 | Year 3 | 7 students
+  CS3141 | Year 5 | 2 students
+  CSE1002 | Year 2 | 2 students
+  CSE2121 | Year 3 | 432 students
+  CV4152 | Year 7 | 14 students
+  CY1001 | Year 2 | 2 students
+  CY3147 | Year 5 | 4 students
+  DSE3140 | Year 5 | 198 students
+  ECO7122 | Year 3 | 2 students
+  EE4140 | Year 7 | 5 students
+  ELC2102 | Year 3 | 27 students
+  EO3102 | Year 5 | 33 students
+  HA4103 | Year 7 | 17 students
+  HOM1103 | Year 1 | 7 students
+  IDE2104 | Year 3 | 22 students
+  IMB1102 | Year 1 | 58 students
+  INT3142 | Year 5 | 34 students
+  INT3144 | Year 5 | 43 students
+  IT4148 | Year 7 | 81 students
+  IT4153 | Year 7 | 166 students
+  LA2107 | Year 3 | 5 students
+  LA4101 | Year 7 | 142 students
+  LA4143 | Year 5 | 30 students
+  LAS2104 | Year 3 | 107 students
+  LAW1105 | Year 1 | 44 students
+  LLC1011 | Year 1 | 1710 students
+  LLC7143 | Year 3 | 12 students
+  MAS2113 | Year 3 | 4 students
+  MAS8003 | Year 1 | 1 students
+  MAS8013 | Year 1 | 2 students
+  MBA7151 | Year 3 | 24 students
+  MBA7168 | Year 3 | 23 students
+  ME3103 | Year 5 | 1 students
+  PS3143 | Year 5 | 67 students
+  PY3153 | Year 5 | 6 students
+  UXI2103 | Year 3 | 26 students
+
+============================================================
+TIME SLOT 8
+============================================================
+  AIM2120 | Year 3 | 598 students
+  AIM3120 | Year 5 | 539 students
+  ARC2103 | Year 3 | 23 students
+  ARC6102 | Year 1 | 4 students
+  AT2102 | Year 3 | 1 students
+  AUT3102 | Year 5 | 7 students
+  BB2101 | Year 3 | 9 students
+  BCH1115 | Year 1 | 101 students
+  BIO1150 | Year 1 | 77 students
+  BIT3122 | Year 5 | 47 students
+  BT3114 | Year 5 | 10 students
+  CA3149 | Year 5 | 101 students
+  CA3152 | Year 5 | 41 students
+  CAP2106 | Year 3 | 166 students
+  CAP7154 | Year 3 | 27 students
+  CC4149 | Year 7 | 95 students
+  CCE2120 | Year 3 | 61 students
+  CHY2104 | Year 3 | 5 students
+  CHY6105 | Year 1 | 13 students
+  CIV1002 | Year 1 | 402 students
+  CIV2101 | Year 3 | 31 students
+  CIV3102 | Year 5 | 21 students
+  COM6106 | Year 1 | 6 students
+  CS3142 | Year 5 | 1 students
+  CS4146 | Year 7 | 265 students
+  CSE3102 | Year 5 | 730 students
+  CSE6151 | Year 1 | 6 students
+  CSE8004 | Year 1 | 1 students
+  DR6001 | Year 1 | 28 students
+  ECE3143 | Year 5 | 46 students
+  ECE8011 | Year 1 | 1 students
+  ECO1140 | Year 1 | 8 students
+  EEE2103 | Year 3 | 6 students
+  EEE8001 | Year 1 | 1 students
+  ELC3121 | Year 5 | 22 students
+  FD3101 | Year 5 | 12 students
+  HA2103 | Year 3 | 1 students
+  HOM2104 | Year 3 | 7 students
+  HT2101 | Year 3 | 1 students
+  ID3106 | Year 5 | 32 students
+  IIS3121 | Year 5 | 147 students
+  IM3101 | Year 5 | 19 students
+  IS4158 | Year 7 | 132 students
+  IS4162 | Year 7 | 62 students
+  IS4164 | Year 7 | 63 students
+  JC3141 | Year 5 | 61 students
+  JMC1102 | Year 1 | 67 students
+  JMC6106 | Year 1 | 14 students
+  LA2104 | Year 3 | 1 students
+  LCM2103 | Year 3 | 94 students
+  LCM3141 | Year 3 | 30 students
+  LLC6103 | Year 1 | 9 students
+  LLM6102 | Year 1 | 29 students
+  LN5101 | Year 9 | 19 students
+  MA3103 | Year 5 | 6 students
+  MAS6116 | Year 1 | 4 students
+  MAS8029 | Year 1 | 1 students
+  MC4161 | Year 7 | 25 students
+  MCE8013 | Year 1 | 1 students
+  PES1102 | Year 1 | 12 students
+  PHY2102 | Year 3 | 8 students
+  PSY7101 | Year 3 | 80 students
+  RAI2101 | Year 3 | 76 students
+  VDT2101 | Year 3 | 22 students
+  VDT3102 | Year 5 | 9 students
+
+============================================================
+TIME SLOT 9
+============================================================
+  AI2101 | Year 3 | 1 students
+  AI3101 | Year 5 | 1 students
+  AR3105 | Year 5 | 23 students
+  ARC1103 | Year 1 | 32 students
+  ART2143 | Year 3 | 10 students
+  ART6103 | Year 1 | 8 students
+  AT2143 | Year 3 | 2 students
+  AT3101 | Year 5 | 17 students
+  AU4150 | Year 7 | 6 students
+  AUT2120 | Year 3 | 17 students
+  BB3106 | Year 5 | 345 students
+  BBA1103 | Year 1 | 288 students
+  BCF1101 | Year 1 | 40 students
+  BCH2103 | Year 3 | 93 students
+  BH2107 | Year 3 | 5 students
+  BIO1103 | Year 1 | 109 students
+  BIO2102 | Year 3 | 70 students
+  BIO8015 | Year 1 | 3 students
+  BT3101 | Year 5 | 56 students
+  CA2104 | Year 3 | 6 students
+  CAP1104 | Year 1 | 198 students
+  CCE3141 | Year 5 | 78 students
+  CE4147 | Year 7 | 8 students
+  CHE2102 | Year 3 | 13 students
+  CHE3143 | Year 5 | 4 students
+  CHY6111 | Year 1 | 41 students
+  COM2105 | Year 3 | 15 students
+  COM7106 | Year 3 | 10 students
+  CS4165 | Year 7 | 9 students
+  CSE2122 | Year 3 | 274 students
+  CSE8014 | Year 1 | 20 students
+  CV4148 | Year 7 | 14 students
+  CY3140 | Year 5 | 4 students
+  DS4150 | Year 7 | 178 students
+  DSE2241 | Year 4 | 1 students
+  ECO1101 | Year 1 | 34 students
+  ECO2105 | Year 3 | 23 students
+  ECO6101 | Year 1 | 5 students
+  ECO7170 | Year 3 | 2 students
+  EE4163 | Year 7 | 5 students
+  EEE3101 | Year 5 | 8 students
+  EL4149 | Year 7 | 32 students
+  ELC2101 | Year 3 | 26 students
+  EO3140 | Year 5 | 28 students
+  HA4102 | Year 7 | 18 students
+  HOM4103 | Year 3 | 10 students
+  HT3103 | Year 5 | 11 students
+  ICD2303 | Year 3 | 5 students
+  IDE6303 | Year 3 | 8 students
+  IIS2120 | Year 3 | 64 students
+  IMB1104 | Year 1 | 223 students
+  INT2101 | Year 3 | 340 students
+  IS2103 | Year 3 | 1 students
+  IT4144 | Year 7 | 65 students
+  IT4147 | Year 7 | 102 students
+  IT4152 | Year 7 | 23 students
+  JC2102 | Year 3 | 1 students
+  LA2102 | Year 3 | 4 students
+  LA4102 | Year 7 | 144 students
+  LA4201 | Year 8 | 1 students
+  LA5103 | Year 9 | 163 students
+  LAIX05 | Year 10 | 1 students
+  LAS2102 | Year 3 | 111 students
+  LAW2103 | Year 1 | 44 students
+  LN3142 | Year 5 | 15 students
+  MA1001 | Year 2 | 1 students
+  MA1101 | Year 1 | 2 students
+  MAS1001 | Year 1 | 1635 students
+  MAS2116 | Year 3 | 4 students
+  MAS8016 | Year 1 | 11 students
+  MBA7164 | Year 3 | 20 students
+  MBA7169 | Year 3 | 7 students
+  MBB6107 | Year 1 | 12 students
+  MC2101 | Year 3 | 2 students
+  MCE3102 | Year 5 | 14 students
+  MEE3102 | Year 5 | 20 students
+  PHY7102 | Year 1 | 4 students
+  PS2103 | Year 3 | 6 students
+
+============================================================
+TIME SLOT 10
+============================================================
+  AIM3144 | Year 5 | 124 students
+  AR4105 | Year 7 | 17 students
+  ARC7101 | Year 3 | 4 students
+  ART7142 | Year 3 | 10 students
+  AT3157 | Year 5 | 13 students
+  BB2106 | Year 3 | 8 students
+  BB3101 | Year 5 | 1 students
+  BBN2104 | Year 3 | 48 students
+  BH3102 | Year 5 | 114 students
+  BIO7140 | Year 3 | 17 students
+  CAP2140 | Year 3 | 29 students
+  CAP6106 | Year 1 | 134 students
+  CAP6111 | Year 1 | 11 students
+  CC4166 | Year 7 | 67 students
+  CCE2101 | Year 3 | 188 students
+  CH3102 | Year 5 | 10 students
+  CHY8006 | Year 1 | 5 students
+  CHY8010 | Year 1 | 3 students
+  COM6105 | Year 1 | 6 students
+  CS3202 | Year 6 | 1 students
+  CS4156 | Year 7 | 38 students
+  CS4163 | Year 7 | 286 students
+  CS4166 | Year 7 | 11 students
+  CSE3101 | Year 5 | 733 students
+  CSE6101 | Year 1 | 6 students
+  CSE8010 | Year 1 | 1 students
+  CV4141 | Year 7 | 6 students
+  DS3204 | Year 6 | 1 students
+  DSE3180 | Year 5 | 6 students
+  EC4172 | Year 7 | 30 students
+  EEE1001 | Year 1 | 403 students
+  EEE2102 | Year 3 | 6 students
+  EO3147 | Year 5 | 5 students
+  ICS2101 | Year 3 | 180 students
+  INT3101 | Year 5 | 322 students
+  IS4155 | Year 7 | 127 students
+  JC1104 | Year 1 | 2 students
+  JC3140 | Year 5 | 5 students
+  JMC1101 | Year 1 | 66 students
+  LA1301 | Year 3 | 1 students
+  LA3106 | Year 5 | 158 students
+  LCM2104 | Year 3 | 122 students
+  LCM2120 | Year 3 | 290 students
+  LLC1010 | Year 2 | 2 students
+  LLM6104 | Year 1 | 13 students
+  LLM6111 | Year 1 | 5 students
+  LN1001 | Year 2 | 1 students
+  LN1107 | Year 1 | 1 students
+  MAS2144 | Year 3 | 3 students
+  MAS8021 | Year 1 | 1 students
+  MBA6112 | Year 1 | 106 students
+  MC4145 | Year 7 | 25 students
+  ME0001 | Year 7 | 26 students
+  PES2104 | Year 3 | 12 students
+  PES8003 | Year 1 | 1 students
+  PS3150 | Year 5 | 70 students
+  PSY1101 | Year 1 | 160 students
+  VDT3140 | Year 5 | 9 students
+
+============================================================
+TIME SLOT 11
+============================================================
+  AA3101 | Year 5 | 15 students
+  AI3104 | Year 5 | 1 students
+  AIM2101 | Year 3 | 601 students
+  ARC1105 | Year 1 | 32 students
+  ARC6104 | Year 1 | 4 students
+  ART1101 | Year 1 | 27 students
+  AT2104 | Year 3 | 1 students
+  BB3109 | Year 5 | 335 students
+  BBA1101 | Year 1 | 283 students
+  BCH1112 | Year 1 | 101 students
+  BH2105 | Year 3 | 3 students
+  BIT3142 | Year 5 | 38 students
+  CA3110 | Year 5 | 164 students
+  CCE3143 | Year 5 | 42 students
+  CCE3144 | Year 5 | 73 students
+  CHY2160 | Year 3 | 85 students
+  CIV8004 | Year 1 | 4 students
+  CM3142 | Year 5 | 2 students
+  CM3143 | Year 5 | 11 students
+  CM3245 | Year 6 | 1 students
+  COM2140 | Year 3 | 8 students
+  COM2143 | Year 3 | 8 students
+  COM7101 | Year 3 | 7 students
+  CS3101 | Year 5 | 3 students
+  CS3203 | Year 6 | 2 students
+  CSE2102 | Year 3 | 729 students
+  CSE8011 | Year 1 | 17 students
+  DS4158 | Year 7 | 178 students
+  DSE6101 | Year 1 | 4 students
+  EC4155 | Year 7 | 20 students
+  ECE6148 | Year 1 | 3 students
+  ECO1103 | Year 1 | 34 students
+  ECO2141 | Year 3 | 7 students
+  ECO7123 | Year 3 | 2 students
+  EO3142 | Year 5 | 24 students
+  FAD2102 | Year 3 | 15 students
+  HOM2103 | Year 3 | 7 students
+  HT3142 | Year 5 | 12 students
+  HTO1101 | Year 1 | 14 students
+  ICS6141 | Year 1 | 3 students
+  IDE6154 | Year 1 | 2 students
+  IIS3120 | Year 5 | 60 students
+  IM3105 | Year 5 | 19 students
+  IS2104 | Year 3 | 1 students
+  LA2105 | Year 3 | 4 students
+  LA3107 | Year 5 | 30 students
+  LA4105 | Year 7 | 142 students
+  LA5104 | Year 9 | 165 students
+  LAS2101 | Year 3 | 110 students
+  LCM6140 | Year 1 | 6 students
+  LLC1101 | Year 1 | 11 students
+  LLC2101 | Year 3 | 9 students
+  LLC7103 | Year 3 | 15 students
+  LN3140 | Year 5 | 15 students
+  MA3141 | Year 5 | 6 students
+  MAS1107 | Year 1 | 1 students
+  MAS1109 | Year 1 | 73 students
+  MAS2140 | Year 3 | 15 students
+  MAS6118 | Year 1 | 5 students
+  MAS8009 | Year 1 | 5 students
+  MAS8020 | Year 1 | 2 students
+  MAS8025 | Year 1 | 1 students
+  MBA7157 | Year 3 | 30 students
+  MBA7167 | Year 3 | 17 students
+  MBA7172 | Year 3 | 8 students
+  MCE2102 | Year 3 | 32 students
+  MCE3152 | Year 5 | 14 students
+  ME3104 | Year 5 | 1 students
+  PES1103 | Year 1 | 12 students
+  PHY6103 | Year 1 | 2 students
+  PS2101 | Year 3 | 4 students
+  PS3114 | Year 5 | 1 students
+
+============================================================
+TIME SLOT 12
+============================================================
+  AI4101 | Year 7 | 350 students
+  AIM3143 | Year 5 | 419 students
+  AR3104 | Year 5 | 23 students
+  ARC2104 | Year 3 | 23 students
+  AT3196 | Year 5 | 13 students
+  AU4141 | Year 7 | 6 students
+  BB2247 | Year 4 | 1 students
+  BBA1120 | Year 1 | 115 students
+  BBN2105 | Year 3 | 48 students
+  BCH2101 | Year 3 | 97 students
+  BIT3143 | Year 5 | 9 students
+  BT3148 | Year 5 | 66 students
+  CA2141 | Year 3 | 3 students
+  CAP6100 | Year 1 | 14 students
+  CAP6109 | Year 1 | 11 students
+  CC4158 | Year 7 | 111 students
+  CC4159 | Year 7 | 137 students
+  CHE2103 | Year 3 | 13 students
+  CHY2105 | Year 3 | 6 students
+  CHY8002 | Year 1 | 4 students
+  CHY8007 | Year 1 | 1 students
+  CIV2103 | Year 3 | 29 students
+  CIV3140 | Year 5 | 8 students
+  CIV8005 | Year 1 | 1 students
+  COM6102 | Year 1 | 10 students
+  CS1001 | Year 2 | 1 students
+  CS3240 | Year 6 | 1 students
+  CS4150 | Year 7 | 25 students
+  CS4158 | Year 7 | 74 students
+  CSE8005 | Year 1 | 5 students
+  CV4149 | Year 7 | 13 students
+  CV4150 | Year 7 | 7 students
+  ECE1001 | Year 1 | 1295 students
+  ECE2103 | Year 3 | 143 students
+  EE4142 | Year 7 | 5 students
+  EEE2120 | Year 3 | 6 students
+  EEE3143 | Year 5 | 8 students
+  FD3102 | Year 5 | 12 students
+  HA4105 | Year 7 | 29 students
+  HOM1102 | Year 1 | 7 students
+  HT2102 | Year 3 | 1 students
+  HTO2101 | Year 3 | 10 students
+  ICS2120 | Year 3 | 181 students
+  IDE2102 | Year 3 | 22 students
+  IIS2101 | Year 3 | 259 students
+  IS4152 | Year 7 | 123 students
+  IT4150 | Year 7 | 301 students
+  JC2142 | Year 3 | 3 students
+  LA1103 | Year 1 | 2 students
+  LA1141 | Year 1 | 1 students
+  LA3141 | Year 5 | 154 students
+  LAW2101 | Year 1 | 45 students
+  LCM3101 | Year 3 | 30 students
+  LLM6113 | Year 1 | 13 students
+  MA2144 | Year 3 | 1 students
+  MBA6111 | Year 1 | 109 students
+  MBB6102 | Year 1 | 12 students
+  MEE2101 | Year 3 | 63 students
+  MEE3120 | Year 5 | 20 students
+  MEE8009 | Year 1 | 2 students
+  PES2102 | Year 3 | 12 students
+  PS3142 | Year 5 | 64 students
+  PSY6102 | Year 1 | 70 students
+  PSY7102 | Year 3 | 77 students
+
+============================================================
+TIME SLOT 13
+============================================================
+  AIM6101 | Year 1 | 18 students
+  AR4145 | Year 7 | 17 students
+  ARC1102 | Year 1 | 30 students
+  ARC6101 | Year 1 | 4 students
+  ART7144 | Year 3 | 10 students
+  BA3140 | Year 5 | 25 students
+  BB1102 | Year 1 | 4 students
+  BB3103 | Year 5 | 1 students
+  BB3140 | Year 5 | 8 students
+  BBA2101 | Year 3 | 283 students
+  BBA8020 | Year 1 | 2 students
+  BBN1105 | Year 1 | 161 students
+  BCF1104 | Year 1 | 38 students
+  BCH1114 | Year 1 | 101 students
+  BH2103 | Year 3 | 8 students
+  BIO6102 | Year 1 | 30 students
+  BRG0002 | Year 1 | 2 students
+  BRG0004 | Year 1 | 1 students
+  BT2152 | Year 3 | 1 students
+  CAP2142 | Year 3 | 35 students
+  CAP7152 | Year 3 | 85 students
+  CC3101 | Year 5 | 1 students
+  CCE3140 | Year 5 | 64 students
+  CHY7161 | Year 3 | 3 students
+  CHY8005 | Year 1 | 2 students
+  CIV3141 | Year 5 | 13 students
+  CS3143 | Year 5 | 4 students
+  CS3201 | Year 6 | 5 students
+  CS8009 | Year 1 | 4 students
+  CSE3149 | Year 5 | 134 students
+  CSE8018 | Year 1 | 7 students
+  DSE3150 | Year 5 | 143 students
+  DSE3151 | Year 5 | 278 students
+  EC4140 | Year 7 | 15 students
+  EC4143 | Year 7 | 35 students
+  ECO1107 | Year 1 | 117 students
+  ECO2102 | Year 3 | 23 students
+  EL4101 | Year 7 | 32 students
+  HTO1104 | Year 1 | 14 students
+  ICS6104 | Year 1 | 4 students
+  IIS3140 | Year 5 | 39 students
+  IIS3142 | Year 5 | 56 students
+  IMB2103 | Year 3 | 37 students
+  INT3143 | Year 5 | 68 students
+  IS3105 | Year 5 | 2 students
+  IT3140 | Year 5 | 1 students
+  JC3142 | Year 5 | 15 students
+  JC3143 | Year 5 | 50 students
+  LAS2103 | Year 3 | 111 students
+  LLC1110 | Year 1 | 458 students
+  LLC2102 | Year 3 | 9 students
+  LLC7101 | Year 3 | 14 students
+  LLM6107 | Year 1 | 10 students
+  LN2007 | Year 3 | 5 students
+  LN3102 | Year 5 | 15 students
+  MAS2115 | Year 3 | 4 students
+  MAS2146 | Year 3 | 82 students
+  MAS8031 | Year 1 | 3 students
+  MBA7150 | Year 3 | 10 students
+  MBA7161 | Year 3 | 17 students
+  MBA7173 | Year 3 | 8 students
+  MCE2103 | Year 3 | 34 students
+  ME1006 | Year 1 | 7 students
+  ME2001 | Year 3 | 2 students
+  ME4161 | Year 7 | 26 students
+  PHY8003 | Year 1 | 3 students
+  PSY2101 | Year 3 | 133 students
+  PY1001 | Year 2 | 3 students
+  RAI2102 | Year 3 | 76 students
+
+============================================================
+TIME SLOT 14
+============================================================
+  AI4103 | Year 7 | 350 students
+  AIM2103 | Year 3 | 599 students
+  AIM3180 | Year 5 | 19 students
+  BB2142 | Year 3 | 6 students
+  BB3150 | Year 5 | 168 students
+  BBN2106 | Year 3 | 46 students
+  BH3104 | Year 5 | 114 students
+  BI1001 | Year 2 | 1 students
+  BIO6112 | Year 1 | 12 students
+  BIO7103 | Year 3 | 22 students
+  BIT3102 | Year 5 | 47 students
+  CA2105 | Year 3 | 5 students
+  CA3150 | Year 5 | 22 students
+  CAP1105 | Year 1 | 199 students
+  CAP6101 | Year 1 | 134 students
+  CC4140 | Year 7 | 190 students
+  CCE2103 | Year 3 | 186 students
+  CHY6102 | Year 1 | 7 students
+  CM3104 | Year 5 | 29 students
+  COM2103 | Year 3 | 15 students
+  COM6103 | Year 1 | 6 students
+  CS4140 | Year 7 | 256 students
+  CS4142 | Year 7 | 279 students
+  CS4159 | Year 7 | 295 students
+  CSE3142 | Year 5 | 320 students
+  CSE3143 | Year 5 | 109 students
+  CSE8020 | Year 1 | 6 students
+  CV4144 | Year 7 | 18 students
+  DS3201 | Year 6 | 1 students
+  DSE2101 | Year 3 | 521 students
+  ECE3145 | Year 5 | 32 students
+  ECE8006 | Year 1 | 2 students
+  EE4141 | Year 7 | 5 students
+  EEE3120 | Year 5 | 8 students
+  ELC3101 | Year 5 | 22 students
+  IIS2103 | Year 3 | 258 students
+  IMB1101 | Year 1 | 58 students
+  IS4161 | Year 7 | 60 students
+  IS4163 | Year 7 | 70 students
+  JC2140 | Year 3 | 1 students
+  LA1901 | Year 9 | 1 students
+  LA3203 | Year 6 | 1 students
+  LA5102 | Year 9 | 163 students
+  LCM2119 | Year 3 | 94 students
+  LLM6112 | Year 1 | 13 students
+  MAS6112 | Year 1 | 4 students
+  MBA6113 | Year 1 | 115 students
+  MBB7106 | Year 3 | 11 students
+  MC4163 | Year 7 | 25 students
+  MCE3101 | Year 5 | 14 students
+  MEE2120 | Year 3 | 39 students
+  PES2101 | Year 3 | 12 students
+  PHY2141 | Year 3 | 9 students
+  PSY7103 | Year 3 | 77 students
+  PY3102 | Year 5 | 6 students
+
+============================================================
+TIME SLOT 15
+============================================================
+  AA3102 | Year 5 | 15 students
+  ARC2106 | Year 3 | 23 students
+  ART1105 | Year 1 | 42 students
+  AT1103 | Year 1 | 1 students
+  AU4153 | Year 7 | 6 students
+  AUT3140 | Year 5 | 7 students
+  BB2146 | Year 3 | 6 students
+  BBA2104 | Year 3 | 286 students
+  BIO1102 | Year 1 | 109 students
+  BIO2111 | Year 3 | 12 students
+  BIO8008 | Year 1 | 6 students
+  BT3102 | Year 5 | 56 students
+  CAP2141 | Year 3 | 100 students
+  CC3103 | Year 5 | 1 students
+  CC4143 | Year 7 | 140 students
+  CHY7104 | Year 3 | 3 students
+  COM7104 | Year 3 | 7 students
+  CS3241 | Year 6 | 2 students
+  CSE2101 | Year 3 | 758 students
+  CSE6104 | Year 1 | 6 students
+  CSE8017 | Year 1 | 1 students
+  DSE3141 | Year 5 | 256 students
+  DSE6102 | Year 1 | 5 students
+  EC2201 | Year 4 | 5 students
+  ECE6105 | Year 1 | 3 students
+  ECO2103 | Year 3 | 23 students
+  EL4150 | Year 7 | 32 students
+  HA4104 | Year 7 | 17 students
+  HOM2101 | Year 3 | 7 students
+  HOM4101 | Year 3 | 9 students
+  HT3102 | Year 5 | 11 students
+  ICS2102 | Year 3 | 181 students
+  ICS6102 | Year 1 | 3 students
+  IIS3152 | Year 5 | 49 students
+  IM3103 | Year 5 | 19 students
+  INT3102 | Year 5 | 323 students
+  IS3103 | Year 5 | 3 students
+  IT2102 | Year 3 | 1 students
+  IT4140 | Year 7 | 246 students
+  IT4142 | Year 7 | 37 students
+  LA1101 | Year 1 | 2 students
+  LA3102 | Year 5 | 157 students
+  LA4141 | Year 5 | 30 students
+  LA4142 | Year 7 | 143 students
+  LAW2102 | Year 1 | 44 students
+  LAW8002 | Year 1 | 6 students
+  LCM2102 | Year 3 | 90 students
+  LLC1113 | Year 1 | 232 students
+  LLC2103 | Year 3 | 9 students
+  LLC6104 | Year 1 | 9 students
+  LLM6115 | Year 1 | 11 students
+  LN3103 | Year 5 | 15 students
+  MA3101 | Year 5 | 6 students
+  MAS6119 | Year 1 | 11 students
+  MBA7145 | Year 3 | 51 students
+  MC2104 | Year 3 | 1 students
+  ME0002 | Year 7 | 26 students
+  PHY7103 | Year 1 | 3 students
+  PS2104 | Year 3 | 3 students
+  PS3141 | Year 5 | 56 students
+  PS3147 | Year 5 | 13 students
+  PSY2102 | Year 3 | 133 students
+  VDT2102 | Year 3 | 22 students
+
+============================================================
+TIME SLOT 16
+============================================================
+  AI3102 | Year 5 | 3 students
+  AT1141 | Year 1 | 2 students
+  BA3104 | Year 5 | 25 students
+  BB3149 | Year 5 | 170 students
+  BBA1102 | Year 1 | 274 students
+  BBN1103 | Year 1 | 163 students
+  BCF1103 | Year 1 | 40 students
+  BH2101 | Year 3 | 3 students
+  BIO6103 | Year 1 | 26 students
+  BRG0005 | Year 1 | 1 students
+  BT3111 | Year 5 | 10 students
+  CA2140 | Year 3 | 2 students
+  CA3106 | Year 5 | 164 students
+  CAP6105 | Year 1 | 133 students
+  CC4141 | Year 7 | 190 students
+  CH3101 | Year 5 | 10 students
+  CHE8028 | Year 1 | 7 students
+  COM6101 | Year 1 | 10 students
+  CS4143 | Year 7 | 280 students
+  CSB3101 | Year 5 | 17 students
+  CSE3140 | Year 5 | 139 students
+  CSE3148 | Year 5 | 115 students
+  CSE8006 | Year 1 | 15 students
+  CV4142 | Year 7 | 9 students
+  ECE1002 | Year 1 | 412 students
+  ECE2101 | Year 3 | 142 students
+  ECE8014 | Year 1 | 1 students
+  EEE2101 | Year 3 | 7 students
+  EO3146 | Year 5 | 5 students
+  HOM1104 | Year 1 | 7 students
+  INT2102 | Year 3 | 342 students
+  IS4154 | Year 7 | 67 students
+  JMC6102 | Year 1 | 15 students
+  LA2106 | Year 3 | 1 students
+  LA5105 | Year 9 | 165 students
+  LLC1114 | Year 1 | 200 students
+  MBA6102 | Year 1 | 119 students
+  MCE3141 | Year 5 | 14 students
+  PES2103 | Year 3 | 12 students
+  PSY6104 | Year 1 | 71 students
+  PY2101 | Year 3 | 1 students
+  PY2140 | Year 3 | 1 students
+  RAI2120 | Year 3 | 76 students
+
+============================================================
+TIME SLOT 17
+============================================================
+  AI4145 | Year 7 | 349 students
+  AIM3140 | Year 5 | 282 students
+  AIM6102 | Year 1 | 18 students
+  ARC2105 | Year 3 | 23 students
+  ARC6103 | Year 1 | 6 students
+  ART7102 | Year 3 | 10 students
+  AT1151 | Year 1 | 1 students
+  AT3102 | Year 5 | 17 students
+  AU4146 | Year 7 | 6 students
+  BB1104 | Year 1 | 2 students
+  BB2140 | Year 3 | 5 students
+  BB2148 | Year 3 | 2 students
+  BB3146 | Year 5 | 165 students
+  BBA8019 | Year 1 | 2 students
+  BCH2104 | Year 3 | 97 students
+  BH3105 | Year 5 | 114 students
+  BIO2103 | Year 3 | 70 students
+  BIO6113 | Year 1 | 12 students
+  BIO7102 | Year 3 | 17 students
+  BIO8002 | Year 1 | 1 students
+  BIT2103 | Year 3 | 64 students
+  BT3103 | Year 5 | 56 students
+  CAP1180 | Year 1 | 183 students
+  CAP6112 | Year 1 | 11 students
+  CAP7106 | Year 3 | 108 students
+  CAP8001 | Year 1 | 8 students
+  CC3104 | Year 5 | 2 students
+  CC4142 | Year 7 | 140 students
+  CCE3145 | Year 5 | 43 students
+  CE4149 | Year 7 | 8 students
+  CHE2101 | Year 3 | 13 students
+  CHE3141 | Year 5 | 4 students
+  CHY2106 | Year 3 | 6 students
+  CHY6104 | Year 1 | 6 students
+  CIV1001 | Year 1 | 1 students
+  CIV2102 | Year 3 | 30 students
+  CM2103 | Year 3 | 1 students
+  CM3201 | Year 6 | 1 students
+  COM7105 | Year 3 | 7 students
+  CS4141 | Year 7 | 256 students
+  CS4160 | Year 7 | 295 students
+  CSB2102 | Year 3 | 17 students
+  CY3105 | Year 5 | 4 students
+  DS4141 | Year 7 | 178 students
+  EC4146 | Year 7 | 36 students
+  EC4147 | Year 7 | 14 students
+  ECE3101 | Year 5 | 79 students
+  ECO6102 | Year 1 | 5 students
+  EEE3140 | Year 5 | 8 students
+  EL4161 | Year 7 | 32 students
+  ELC3142 | Year 5 | 22 students
+  EO3141 | Year 5 | 28 students
+  HA2101 | Year 3 | 1 students
+  HOM2105 | Year 3 | 7 students
+  HOM4102 | Year 3 | 10 students
+  HTO1102 | Year 1 | 14 students
+  ICS2103 | Year 3 | 178 students
+  IIS3102 | Year 5 | 207 students
+  IM3104 | Year 5 | 19 students
+  INT3141 | Year 5 | 178 students
+  IS2102 | Year 3 | 2 students
+  IS3101 | Year 5 | 3 students
+  IS4151 | Year 7 | 67 students
+  IT4141 | Year 7 | 246 students
+  IT4143 | Year 7 | 37 students
+  JC3101 | Year 5 | 63 students
+  JMC7102 | Year 3 | 15 students
+  JMC8004 | Year 1 | 2 students
+  LA3104 | Year 5 | 156 students
+  LA3109 | Year 5 | 30 students
+  LA3205 | Year 6 | 3 students
+  LA4104 | Year 7 | 142 students
+  LCM2109 | Year 3 | 30 students
+  LLC1102 | Year 1 | 13 students
+  LLC1112 | Year 1 | 72 students
+  LLC2019 | Year 3 | 203 students
+  LLC7102 | Year 3 | 14 students
+  LLM6101 | Year 1 | 29 students
+  MAS2141 | Year 3 | 15 students
+  MAS6102 | Year 1 | 5 students
+  MAS6111 | Year 1 | 4 students
+  MBA7177 | Year 3 | 60 students
+  ME4101 | Year 7 | 5 students
+  MEE2102 | Year 3 | 63 students
+  MEE3101 | Year 5 | 20 students
+  PHY2140 | Year 3 | 9 students
+  PHY6101 | Year 1 | 7 students
+  PSY1102 | Year 1 | 160 students
+  PSY1140 | Year 1 | 115 students
+  PSY2103 | Year 3 | 133 students
+  PSY2141 | Year 3 | 20 students
+  SMX0003 | Year 5 | 2 students
+  UX3101 | Year 5 | 31 students
+
+============================================================
+TIME SLOT 19
+============================================================
+  CHY1003 | Year 1 | 894 students
+  CSC1101 | Year 1 | 3038 students
+  MBA7162 | Year 3 | 25 students
+
+============================================================
+TIME SLOT 20
+============================================================
+  DOR8002 | Year 1 | 196 students
+  MEE2001 | Year 3 | 1783 students
+
+============================================================
+TIME SLOT 21
+============================================================
+  MAS1002 | Year 1 | 1727 students
+  MBA7175 | Year 3 | 80 students
+
+============================================================
+TIME SLOT 22
+============================================================
+  DSE3101 | Year 5 | 456 students
+  MBB2101 | Year 3 | 3319 students
+
+============================================================
+TIME SLOT 23
+============================================================
+  DOA1002 | Year 1 | 1736 students
+  DOR8001 | Year 1 | 196 students
+  MBA7149 | Year 3 | 21 students
+
+✓ Saved timetable to: output/run_20260402_113602/all/timetable_neal.csv
+✓ Saved timetable visualization to: output/run_20260402_113602/all/timetable_visualization.png
+
+============================================================
+PIPELINE COMPLETE
+============================================================
+Output directory: output/run_20260402_113602/all
+Files generated:
+  - courses.csv (dataset)
+  - conflict_adjacency.csv (conflict graph)
+  - qubo_matrix.npy (QUBO)
+  - *_results.json (solver outputs)
+  - *_all_conflicts.json (all C1/C2/C3/C4 violations)
